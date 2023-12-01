@@ -1,0 +1,9 @@
+[submodule "mext-plataform-api"]
+	path = mext-plataform-api
+	url = https://github.com/MohamedAljoke/mext-plataform-api.git
+[submodule "mext-front"]
+	path = mext-front
+	url = https://github.com/MohamedAljoke/mext-front.git
+[submodule "mext-admin"]
+	path = mext-admin
+	url = https://github.com/MohamedAljoke/mext-admin.git
