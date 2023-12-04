@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  mext-front:
+    container_name: mext-front
+    hostname: mext-front
+    build:
+      context: ./mext-front
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./mext-front:/app
+      
+  mext-admin:
+    container_name: mext-admin
+    hostname: mext-admin
+    build:
+      context: ./mext-admin
+    restart: always
+    ports:
+      - 3005:3005
+    volumes:
+      - ./mext-admin:/app
+
+  backend:
+    container_name: mext-back
+    hostname: mext-back
+    build:
+      context: ./mext-plataform-api
+    restart: always
+    environment:
+      NODE_ENV: development
+      MYSQL_HOST: host.docker.internal
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - ./mext-plataform-api/.env
+    depends_on:
+      - database_mext_mysql
+    volumes:
+      - "${PWD}/_data:/app/_data"
+    networks:
+      - my-network
+  
+
+  mext_redis:
+    image: redis:alpine
+    restart: always
+    env_file:
+     - ./mext-plataform-api/.env
+    ports:
+     - '6379:6379'
+    networks:
+     - my-network
+   
+  database_mext_mysql:
+    hostname: database_mext_mysql
+    container_name: database_mext_mysql
+    image: mysql:8.0
+    restart: always
+    env_file:
+      - ./mext-plataform-api/.env
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    expose:
+      - ${MYSQL_PORT}
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - my-network
+        
+
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  my-db:
+    driver: local
