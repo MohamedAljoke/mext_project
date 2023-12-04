@@ -23,8 +23,24 @@ cp ./mext-plataform-api/.env.example ./mext-plataform-api/.env
 cp ./mext-plataform-api/.env.example .env
 ```
 
+# RUN ON DOCKER
+
 run docker compose
 
 ```
 docker-compose up -d
+```
+
+# RUN ON LOCAL
+
+1. Run npm install:dev, this will install the node_modules for the front-end, admin and back end
+
+```
+npm run install:dev
+```
+
+2. Run npm start:dev, this will start the api, admin and front
+
+```
+npm run start:dev
 ```

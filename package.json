@@ -1,0 +1,23 @@
+{
+  "name": "mext",
+  "version": "1.0.0",
+  "description": "This is a plataform for online courses for the mext scholarship",
+  "main": "index.js",
+  "scripts": {
+    "install:front": "npm install --prefix mext-front",
+    "install:admin": "npm install --prefix mext-admin",
+    "install:api": "npm install --prefix mext-plataform-api",
+    "install:dev": "npm install && npm run install:front && npm run install:admin && npm run install:api",
+    "start:api": "npm start --prefix mext-plataform-api",
+    "start:front": "npm start --prefix mext-front",
+    "start:admin": "npm start --prefix mext-admin",
+    "start:dev": "concurrently \"npm run start:api\" \"npm run start:front\" \"npm run start:admin\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
