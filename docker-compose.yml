@@ -38,8 +38,6 @@ services:
       - ./mext-plataform-api/.env
     depends_on:
       - database_mext_mysql
-    volumes:
-      - "${PWD}/_data:/app/_data"
     networks:
       - my-network
   
