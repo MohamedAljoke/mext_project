@@ -44,3 +44,10 @@ npm run install:dev
 ```
 npm run start:dev
 ```
+
+3. Run backend database migrations
+
+```
+cd mext-plataform-api
+npm run migration:run
+```
